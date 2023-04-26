@@ -45,6 +45,7 @@ const en = {
     componentsTab: "Components",
     debugTab: "Debug",
     communityTab: "Community",
+    navigationTab:"Navigate",
     podcastListTab: "Podcast",
   },
   demoCommunityScreen: {
@@ -69,6 +70,13 @@ const en = {
     hireUs:
       "Whether it's running a full project or getting teams up to speed with our hands-on training, Infinite Red can help with just about any React Native project.",
     hireUsLink: "Send us a message",
+  },
+  NavigationScreen: {
+    title: "Time To Navigate",
+    tagLine:
+      "Enter your Source and Destination Address to get Walking through the safest routes!",
+    
+    
   },
   demoShowroomScreen: {
     jumpStart: "Components to jump start your project!",
