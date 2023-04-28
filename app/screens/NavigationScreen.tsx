@@ -1,22 +1,27 @@
-import React, { FC } from "react"
-import { TextStyle, ViewStyle } from "react-native"
+import React, {FC, useState, useEffect} from "react"
+import { TextStyle, ViewStyle, StyleSheet, View, Dimensions, Button  } from "react-native"
 import { Card, Screen, Text, TextField } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
 import { isRTL } from "../i18n"
+import MapView from 'react-native-maps';
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
 ) {
+  const [mapRegion, setMapRegion] = useState({
+    latitude: 12.9414292,
+    longitude: 77.5665759,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
   return (
     <Screen preset="scroll" contentContainerStyle={$container} safeAreaEdges={["top"]}>
       <Text preset="heading" tx="NavigationScreen.title" style={$title} />
       <Text tx="NavigationScreen.tagLine" style={$tagline} />
-      <Card
-        heading="The google-maps map"
-        content="This should show the layout"
-        style={{ minHeight: 360 }}
+      <MapView style={styles.map} 
+        region={mapRegion }
       />
       <TextField label="Source Address" value="MG Road" placeholder="Text goes here" />
       <TextField label="Destination address" value="Home" placeholder="Text goes here" />
@@ -24,6 +29,16 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
     </Screen>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  map: {
+    width: '100%',
+    height: '100%',
+  },
+});
 
 const $container: ViewStyle = {
   paddingTop: spacing.large + spacing.extraLarge,
