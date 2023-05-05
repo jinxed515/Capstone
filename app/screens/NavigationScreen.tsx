@@ -1,5 +1,5 @@
-import React, {FC, useState, useEffect} from "react"
-import { TextStyle, ViewStyle, StyleSheet, View, Dimensions, Button  } from "react-native"
+import React, { FC, useState, useEffect } from "react"
+import { TextStyle, ViewStyle, StyleSheet, View, Dimensions, Button } from "react-native"
 import { Card, Screen, Text, TextField } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
@@ -17,15 +17,19 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
     longitudeDelta: 0.0421,
   });
   return (
-    <Screen preset="scroll" contentContainerStyle={$container} safeAreaEdges={["top"]}>
+    <Screen preset="scroll" contentContainerStyle={$container} style={styles.overall}  safeAreaEdges={["top"]}>
       <Text preset="heading" tx="NavigationScreen.title" style={$title} />
       <Text tx="NavigationScreen.tagLine" style={$tagline} />
-      <MapView style={styles.map} 
-        region={mapRegion }
-      />
+      <MapView style={styles.map}
+          region={mapRegion}
+        />
+
+    
       <TextField label="Source Address" value="MG Road" placeholder="Text goes here" />
       <TextField label="Destination address" value="Home" placeholder="Text goes here" />
-    
+      
+      
+
     </Screen>
   )
 }
@@ -33,16 +37,20 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '100%',
+    backgroundColor: 'red',
   },
   map: {
     width: '100%',
-    height: '100%',
+    height: '60%',
   },
 });
 
 const $container: ViewStyle = {
+  height:"100%",
   paddingTop: spacing.large + spacing.extraLarge,
   paddingHorizontal: spacing.large,
+
 }
 
 const $title: TextStyle = {
@@ -52,3 +60,6 @@ const $title: TextStyle = {
 const $tagline: TextStyle = {
   marginBottom: spacing.huge,
 }
+
+
+

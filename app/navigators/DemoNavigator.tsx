@@ -45,7 +45,7 @@ export function DemoNavigator() {
         tabBarItemStyle: $tabBarItem,
       }}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="DemoShowroom"
         component={DemoShowroomScreen}
         options={{
@@ -54,7 +54,7 @@ export function DemoNavigator() {
             <Icon icon="components" color={focused && colors.tint} size={30} />
           ),
         }}
-      />
+      /> */}
 
       <Tab.Screen
         name="Navigate"
@@ -67,7 +67,7 @@ export function DemoNavigator() {
         }}
       />
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="DemoPodcastList"
         component={DemoPodcastListScreen}
         options={{
@@ -76,7 +76,7 @@ export function DemoNavigator() {
             <Icon icon="components" color={focused && colors.tint} size={30} />
           ),
         }}
-      />
+      /> */}
 
       <Tab.Screen
         name="DemoDebug"
@@ -84,7 +84,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.debugTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="components" color={focused && colors.tint} size={30} />
+            <Icon icon="community" color={focused && colors.tint} size={30} />
           ),
         }}
       />
