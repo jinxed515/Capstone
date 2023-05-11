@@ -11,10 +11,10 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   _props,
 ) {
   const [mapRegion, setMapRegion] = useState({
-    latitude: 12.9414292,
-    longitude: 77.5665759,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitude: 12.840711,
+    longitude: 77.676369,
+    latitudeDelta: 0.009,
+    longitudeDelta: 0.009,
   });
 
   const [source, onChangeSource] = React.useState('');
@@ -24,9 +24,12 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
     <Screen preset="scroll" contentContainerStyle={$container} style={styles.container} safeAreaEdges={["top"]}>
       <Text preset="heading" tx="NavigationScreen.title" style={$title} />
       <Text tx="NavigationScreen.tagLine" style={$tagline} />
-      <MapView style={styles.map}
-          region={mapRegion}
-      />
+      <MapView 
+        style={styles.map} 
+        region={mapRegion}
+      >
+        
+      </MapView>
       <Text tx="NavigationScreen.sourceInput" style={$inputTitle} />
       <KeyboardAvoidingView>
         <TextInput
@@ -82,4 +85,5 @@ const $tagline: TextStyle = {
 
 const $inputTitle: TextStyle = {
   marginVertical: "1%",  
+  fontWeight: "bold",
 }
