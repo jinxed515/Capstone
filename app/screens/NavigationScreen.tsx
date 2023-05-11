@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react"
-import { TextStyle, ViewStyle, StyleSheet, View, Dimensions, Button } from "react-native"
+import { TextStyle, ViewStyle, StyleSheet, View, Dimensions, Button, TextInput, KeyboardAvoidingView } from "react-native"
 import { Card, Screen, Text, TextField } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
@@ -16,41 +16,60 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
+
+  const [source, onChangeSource] = React.useState('');
+  const [destination, onChangeDestination] = React.useState('');
+
   return (
-    <Screen preset="scroll" contentContainerStyle={$container} style={styles.overall}  safeAreaEdges={["top"]}>
+    <Screen preset="scroll" contentContainerStyle={$container} style={styles.container} safeAreaEdges={["top"]}>
       <Text preset="heading" tx="NavigationScreen.title" style={$title} />
       <Text tx="NavigationScreen.tagLine" style={$tagline} />
       <MapView style={styles.map}
           region={mapRegion}
+      />
+      <Text tx="NavigationScreen.sourceInput" style={$inputTitle} />
+      <KeyboardAvoidingView>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeSource}
+          value={source}
+          placeholder="Enter Starting point"
         />
-
-    
-      <TextField label="Source Address" value="MG Road" placeholder="Text goes here" />
-      <TextField label="Destination address" value="Home" placeholder="Text goes here" />
-      
-      
-
+      <Text tx="NavigationScreen.destInput" style={$inputTitle} />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeDestination}
+        value={destination}
+        placeholder="Enter Ending point"
+      />
+      </KeyboardAvoidingView>
     </Screen>
   )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  
   container: {
-    flex: 1,
-    height: '100%',
-    backgroundColor: 'red',
   },
   map: {
+    height: '50%',
     width: '100%',
-    height: '60%',
+    marginBottom: spacing.large
   },
+  input: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: spacing.small,
+  }
 });
 
 const $container: ViewStyle = {
+  flex: 1, 
+  justifyContent: 'center',
   height:"100%",
-  paddingTop: spacing.large + spacing.extraLarge,
-  paddingHorizontal: spacing.large,
-
+  padding: spacing.large,
 }
 
 const $title: TextStyle = {
@@ -58,8 +77,9 @@ const $title: TextStyle = {
 }
 
 const $tagline: TextStyle = {
-  marginBottom: spacing.huge,
+  marginBottom: spacing.large,
 }
 
-
-
+const $inputTitle: TextStyle = {
+  marginVertical: "1%",  
+}
