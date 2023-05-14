@@ -75,8 +75,8 @@ const en = {
     title: "Time To Navigate",
     tagLine:
       "Enter your Source and Destination Address to get Walking through the safest routes!",
-    
-    
+    sourceInput: "Source Address",
+    destInput: "Destination Address",
   },
   demoShowroomScreen: {
     jumpStart: "Components to jump start your project!",
