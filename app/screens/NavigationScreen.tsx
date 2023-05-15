@@ -46,10 +46,10 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
             region={mapRegion}
           >
             <Marker coordinate={{latitude: 12.840711, longitude: 77.676369}}>
-              {/* <Callout> <Text>{source}</Text> </Callout> */}
+              {/* <Callout> <View> <Text>{source}</Text> </View> </Callout> */}
             </Marker>
             <Marker coordinate={{latitude: 12.84871, longitude: 77.657882}}>
-              {/* <Callout> <Text>{destination}</Text> </Callout> */}
+              {/* <Callout> <View> <Text>{destination}</Text> </View> </Callout> */}
             </Marker>
           </MapView>
         :
