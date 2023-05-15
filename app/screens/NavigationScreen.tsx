@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, useEffect } from "react"
 import { TextStyle, ViewStyle, StyleSheet, View, Dimensions, Button, TextInput, KeyboardAvoidingView, Platform } from "react-native"
 import { Card, Screen, Text, TextField } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
@@ -6,6 +6,7 @@ import { spacing } from "../theme"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
 import { isRTL } from "../i18n"
 import MapView, { Callout, Marker } from 'react-native-maps';
+import { searchPlaces, getRouteCoordinates } from "../TomTomAPI"
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
@@ -16,6 +17,34 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
     latitudeDelta: 0.009,
     longitudeDelta: 0.009,
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await searchPlaces('coffee');
+        console.log(response);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const origin = { lat: 37.7749, lng: -122.4194 }; // San Francisco
+        const destination = { lat: 34.0522, lng: -118.2437 }; // Los Angeles
+        const routeCoordinates = await getRouteCoordinates(origin, destination);
+        console.log(routeCoordinates);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const [source, setSource] = React.useState<string>('');
   const [destination, setDestination] = React.useState<string>('');
