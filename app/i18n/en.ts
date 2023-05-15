@@ -47,6 +47,7 @@ const en = {
     communityTab: "Community",
     navigationTab:"Navigate",
     podcastListTab: "Podcast",
+    streetLightsTab: "Lights",
   },
   demoCommunityScreen: {
     title: "Connect with the community",
@@ -77,6 +78,11 @@ const en = {
       "Enter your Source and Destination Address to get Walking through the safest routes!",
     sourceInput: "Source Address",
     destInput: "Destination Address",
+  },
+  StreetLightsScreen: {
+    title: "Network of Street Lights",
+    tagLine:
+      "Network of Street Lights in Electronic City",
   },
   demoShowroomScreen: {
     jumpStart: "Components to jump start your project!",
@@ -124,7 +130,7 @@ const en = {
     noFavoritesEmptyState: {
       heading: "This looks a bit empty",
       content:
-        "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
+      "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
     },
   },
   // @demo remove-block-end
