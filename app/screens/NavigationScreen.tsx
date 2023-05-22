@@ -6,7 +6,7 @@ import { spacing } from "../theme"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
 import { isRTL } from "../i18n"
 import MapView, { Callout, Marker, Polyline } from 'react-native-maps';
-import { getRouteCoordinates } from "../TomTomAPI"
+import { getRouteCoordinates, getRouteAlternatives } from "../TomTomAPI"
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
@@ -39,6 +39,21 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
+        const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
+        const routeAlternatives = await getRouteAlternatives(origin, destination);
+        console.log(routeAlternatives);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  
   const [source, setSource] = React.useState<string>('');
   const [destination, setDestination] = React.useState<string>('');
 
