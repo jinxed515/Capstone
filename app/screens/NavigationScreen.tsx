@@ -12,11 +12,14 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   _props,
 ) {
   const [mapRegion, setMapRegion] = useState({
-    latitude: 12.840711,
-    longitude: 77.676369,
+    latitude: 12.84371,
+    longitude: 77.67135,
     latitudeDelta: 0.009,
     longitudeDelta: 0.009,
   });
+
+  let source_coord = {latitude: 12.84871, longitude: 77.657882};
+  let destination_coord = {latitude: 12.843911, longitude: 77.671369};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,8 +37,8 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const origin = { lat: 37.7749, lng: -122.4194 }; // San Francisco
-        const destination = { lat: 34.0522, lng: -118.2437 }; // Los Angeles
+        const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
+        const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
         const routeCoordinates = await getRouteCoordinates(origin, destination);
         console.log(routeCoordinates);
       } catch (error) {
@@ -74,11 +77,11 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
             style={styles.map} 
             region={mapRegion}
           >
-            <Marker coordinate={{latitude: 12.840711, longitude: 77.676369}}>
-              {/* <Callout> <View> <Text>{source}</Text> </View> </Callout> */}
-            </Marker>
-            <Marker coordinate={{latitude: 12.84871, longitude: 77.657882}}>
+            <Marker coordinate={source_coord}>
               {/* <Callout> <View> <Text>{destination}</Text> </View> </Callout> */}
+            </Marker>
+            <Marker coordinate={destination_coord}>
+              {/* <Callout> <View> <Text>{source}</Text> </View> </Callout> */}
             </Marker>
           </MapView>
         :
