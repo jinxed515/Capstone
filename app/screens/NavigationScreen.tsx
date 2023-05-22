@@ -6,7 +6,7 @@ import { spacing } from "../theme"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
 import { isRTL } from "../i18n"
 import MapView, { Callout, Marker } from 'react-native-maps';
-import { searchPlaces, getRouteCoordinates } from "../TomTomAPI"
+import { getRouteCoordinates } from "../TomTomAPI"
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
@@ -20,19 +20,6 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
 
   let source_coord = {latitude: 12.84871, longitude: 77.657882};
   let destination_coord = {latitude: 12.843911, longitude: 77.671369};
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await searchPlaces('coffee');
-        console.log(response);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
