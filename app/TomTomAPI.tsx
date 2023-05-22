@@ -5,7 +5,7 @@ export const getRouteCoordinates = async (origin, destination) => {
     try {
         const url = `https://api.tomtom.com/routing/1/calculateRoute/${encodeURIComponent(
         origin.lat + ',' + origin.lng
-        )}:${encodeURIComponent(destination.lat + ',' + destination.lng)}/json?travelMode=car&key=${API_KEY}`;
+        )}:${encodeURIComponent(destination.lat + ',' + destination.lng)}/json?travelMode=pedestrian&key=${API_KEY}`;
         const response = await axios.get(url);
         return response.data.routes[0].legs[0].points;
     } catch (error) {

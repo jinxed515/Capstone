@@ -5,21 +5,23 @@ import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
 import { isRTL } from "../i18n"
-import MapView, { Callout, Marker } from 'react-native-maps';
+import MapView, { Callout, Marker, Polyline } from 'react-native-maps';
 import { getRouteCoordinates } from "../TomTomAPI"
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
 ) {
   const [mapRegion, setMapRegion] = useState({
-    latitude: 12.84371,
-    longitude: 77.67135,
-    latitudeDelta: 0.009,
-    longitudeDelta: 0.009,
+    latitude: 12.848060290069618, 
+    latitudeDelta: 0.021698091960084653, 
+    longitude: 77.66496514901519, 
+    longitudeDelta: 0.02072509378194809
   });
 
   let source_coord = {latitude: 12.84871, longitude: 77.657882};
   let destination_coord = {latitude: 12.843911, longitude: 77.671369};
+
+  const [route, setroute] = React.useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +29,8 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
         const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
         const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
         const routeCoordinates = await getRouteCoordinates(origin, destination);
-        console.log(routeCoordinates);
+        setroute(routeCoordinates);
+        // console.log(routeCoordinates);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -61,18 +64,28 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
         marker 
         ? 
         <MapView 
-            style={styles.map} 
-            region={mapRegion}
-          >
-            <Marker coordinate={source_coord}>
-              {/* <Callout> <View> <Text>{destination}</Text> </View> </Callout> */}
-            </Marker>
-            <Marker coordinate={destination_coord}>
-              {/* <Callout> <View> <Text>{source}</Text> </View> </Callout> */}
-            </Marker>
-          </MapView>
+          style={styles.map} 
+          region={mapRegion}
+          onRegionChangeComplete={(region) => setMapRegion(region)}
+        >
+          <Marker coordinate={source_coord}>
+            {/* <Callout> <View> <Text>{destination}</Text> </View> </Callout> */}
+          </Marker>
+          <Marker coordinate={destination_coord}>
+            {/* <Callout> <View> <Text>{source}</Text> </View> </Callout> */}
+          </Marker>
+          <Polyline
+            coordinates={route}
+            strokeColor="#0000FF"
+            strokeWidth={6}
+          />
+        </MapView>
         :
-          <MapView style={styles.map} region={mapRegion}/> 
+        <MapView 
+          style={styles.map} 
+          region={mapRegion}
+          onRegionChangeComplete={(region) => setMapRegion(region)}
+        /> 
       }
       <KeyboardAvoidingView>
         <View>
