@@ -6,7 +6,7 @@ import { spacing } from "../theme"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
 import { isRTL } from "../i18n"
 import MapView, { Callout, Marker, Polyline } from 'react-native-maps';
-import { getRouteCoordinates } from "../GoogleAPI"
+import { getRouteCoordinate } from "../GoogleAPI"
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
@@ -21,7 +21,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   let source_coord = {latitude: 12.84871, longitude: 77.657882};
   let destination_coord = {latitude: 12.843911, longitude: 77.671369};
 
-  const [routes, setRoutes] = React.useState([]);
+  const [route, setRoute] = React.useState([]);
   const polyline = require('@mapbox/polyline');
 
   useEffect(() => {
@@ -29,13 +29,13 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
       try {
         const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
         const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
-        const routeCoordinates = await getRouteCoordinates(origin, destination);
+        const routeCoordinates = await getRouteCoordinate(origin, destination);
         const decoded_routes = polyline.decode(routeCoordinates);
         const convertedCoordinates = decoded_routes.map(([latitude, longitude]) =>
           JSON.parse(`{"latitude": ${latitude}, "longitude": ${longitude}}`)
         );
         console.log(convertedCoordinates);
-        setRoutes(convertedCoordinates);
+        setRoute(convertedCoordinates);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -80,7 +80,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
             {/* <Callout> <View> <Text>{source}</Text> </View> </Callout> */}
           </Marker>
           <Polyline
-            coordinates={routes}
+            coordinates={route}
             strokeColor="#0000FF"
             strokeWidth={6}
           />
