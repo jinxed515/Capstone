@@ -1,2 +1,4 @@
-const API_KEY = 'zdjVdzWEnutUAenHeDWflJGCL9L4VvKG';
-export default API_KEY;
+export const API_KEY = 'zdjVdzWEnutUAenHeDWflJGCL9L4VvKG';
+const GOOGLE_MAPS_API_KEY = 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY';
+
+export default GOOGLE_MAPS_API_KEY;
