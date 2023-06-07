@@ -27,3 +27,15 @@ export const searchPlaces = async (query) => {
     }
 };  
 
+export const getRouteAlternatives = async (origin, destination) => {
+    try {
+      const url = `https://api.tomtom.com/routing/1/calculateRoute/${encodeURIComponent(
+        origin.lat + ',' + origin.lng
+      )}:${encodeURIComponent(destination.lat + ',' + destination.lng)}/json?travelMode=pedestrian&alternatives=true&key=${API_KEY}`;
+      const response = await axios.get(url);
+      return response.data.routes;
+    } catch (error) {
+      console.error('Error getting route alternatives:', error);
+      throw error;
+    }
+  };

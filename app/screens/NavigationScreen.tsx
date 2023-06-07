@@ -6,7 +6,8 @@ import { spacing } from "../theme"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
 import { isRTL } from "../i18n"
 import MapView, { Callout, Marker, Polyline } from 'react-native-maps';
-import { getRouteCoordinates } from "../TomTomAPI"
+import { getRouteCoordinate, getAlternativeRouteCoordinates } from "../GoogleAPI"
+import { de } from "date-fns/locale"
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
@@ -21,18 +22,46 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   let source_coord = {latitude: 12.84871, longitude: 77.657882};
   let destination_coord = {latitude: 12.843911, longitude: 77.671369};
 
-  const [route, setroute] = React.useState([]);
+  const [route, setRoute] = React.useState([]);
+  const [alternativeRoutes, setAlternativeRoute] = React.useState([]);
+  const polyline = require('@mapbox/polyline');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
         const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
-        const routeCoordinates = await getRouteCoordinates(origin, destination);
-        setroute(routeCoordinates);
-        // console.log(routeCoordinates);
+        const routeCoordinates = await getRouteCoordinate(origin, destination);
+        const decoded_routes = polyline.decode(routeCoordinates);
+        const convertedCoordinates = decoded_routes.map(([latitude, longitude]) =>
+          JSON.parse(`{"latitude": ${latitude}, "longitude": ${longitude}}`)
+        );
+        // console.log(convertedCoordinates);
+        setRoute(convertedCoordinates);
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error in fetching RouteCoordinates:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
+        const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
+        const allRouteCoordinates = await getAlternativeRouteCoordinates(origin, destination);
+        const decoded_routes = allRouteCoordinates.map(polyline.decode);
+        console.log(decoded_routes);
+        // const convertedCoordinates = decoded_routes.map(([decoded_route]) => {
+        //   return decoded_route.map(([latitude, longitude]) => {
+        //     return JSON.parse(`{"latitude": ${latitude}, "longitude": ${longitude}}`);
+        //   });
+        // });        
+        // setAlternativeRoute(convertedCoordinates);
+      } catch (error) {
+        console.error('Error in fetching alternativeRouteCoordinates:', error);
       }
     };
 
@@ -74,11 +103,19 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           <Marker coordinate={destination_coord}>
             {/* <Callout> <View> <Text>{source}</Text> </View> </Callout> */}
           </Marker>
-          <Polyline
+          {/* <Polyline
             coordinates={route}
             strokeColor="#0000FF"
             strokeWidth={6}
-          />
+          /> */}
+          {alternativeRoutes.map((route, index) => (
+            <Polyline
+              key={index}
+              coordinates={route.overview_polyline.points}
+              strokeColor="#000"
+              strokeWidth={3}
+            />
+          ))}
         </MapView>
         :
         <MapView 
