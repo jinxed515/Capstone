@@ -41,9 +41,9 @@ export function DemoNavigator() {
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,
-        tabBarStyle: [$tabBar, { height: bottom + 70 }],
+        tabBarStyle: [$tabBar, { height: bottom + 90 }],
         tabBarActiveTintColor: colors.text,
-        tabBarInactiveTintColor: colors.text,
+        tabBarInactiveTintColor: colors.textDim,
         tabBarLabelStyle: $tabBarLabel,
         tabBarItemStyle: $tabBarItem,
       }}
@@ -54,7 +54,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.componentsTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="components" color={focused && colors.tint} size={30} />
+            <Icon icon="components" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       /> */}
@@ -65,7 +65,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.streetLightsTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="view" color={focused && colors.tint} size={30} />
+            <Icon icon="view" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       /> 
@@ -76,7 +76,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.ViewAllUnsafeRoutes"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="x" color={focused && colors.tint} size={30} />
+            <Icon icon="x" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       /> 
@@ -87,7 +87,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.navigationTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="pin" color={focused && colors.tint} size={30} />
+            <Icon icon="pin" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       />
@@ -98,7 +98,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.debugTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="community" color={focused && colors.tint} size={30} />
+            <Icon icon="community" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       />
@@ -109,7 +109,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.podcastListTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="components" color={focused && colors.tint} size={30} />
+            <Icon icon="components" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       />  */}
@@ -119,12 +119,12 @@ export function DemoNavigator() {
 }
 
 const $tabBar: ViewStyle = {
-  backgroundColor: colors.background,
+  backgroundColor: colors.background_tab,
   borderTopColor: colors.transparent,
 }
 
 const $tabBarItem: ViewStyle = {
-  paddingTop: spacing.medium,
+  paddingTop: spacing.small,
 }
 
 const $tabBarLabel: TextStyle = {

@@ -3,11 +3,9 @@ import { TextStyle, ViewStyle, StyleSheet, View, Dimensions, Button, TextInput, 
 import { Card, Screen, Text, TextField } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
-import { openLinkInBrowser } from "../utils/openLinkInBrowser"
-import { isRTL } from "../i18n"
 import MapView, { Callout, Marker, Polyline } from 'react-native-maps';
 import { getRouteCoordinate, getAlternativeRouteCoordinates } from "../GoogleAPI"
-import { de } from "date-fns/locale"
+import { isCoordinateSafe, routeRating, safetyRatingRoutes } from "app/SafetyScore"
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
@@ -23,7 +21,9 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   let destination_coord = {latitude: 12.843911, longitude: 77.671369};
 
   const [route, setRoute] = React.useState([]);
+
   const [alternativeRoutes, setAlternativeRoute] = React.useState([]);
+  const colors = ["#0000FF","#A2A0A0","#A2A0A0","#A2A0A0","#A2A0A0"];
   
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +36,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
         const convertedCoordinates = decoded_routes.map(([latitude, longitude]) =>
           JSON.parse(`{"latitude": ${latitude}, "longitude": ${longitude}}`)
         );
-        console.log(convertedCoordinates);
+        // console.log(convertedCoordinates);
         setRoute(convertedCoordinates);
       } catch (error) {
         console.error('Error in fetching RouteCoordinates:', error);
@@ -63,8 +63,14 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           latitude: innerArray[0],
           longitude: innerArray[1]
         })));
-        setAlternativeRoute(convertedCoordinates);
-        console.log(convertedCoordinates);
+        const sortOrder = safetyRatingRoutes(convertedCoordinates);
+        convertedCoordinates.sort((a, b) => {
+          const indexA = sortOrder[convertedCoordinates.indexOf(a)];
+          const indexB = sortOrder[convertedCoordinates.indexOf(b)];
+          return indexB - indexA;
+        });
+        setAlternativeRoute(convertedCoordinates);      // SAFEST route in the front
+        // console.log(convertedCoordinates);
       } catch (error) {
         console.error('Error in fetching alternativeRouteCoordinates:', error);
       }
@@ -117,7 +123,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
             <Polyline
               key={index}
               coordinates={route}
-              strokeColor="#000"
+              strokeColor={colors[index]}
               strokeWidth={3}
             />
           ))}
@@ -131,7 +137,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
       }
       <KeyboardAvoidingView>
         <View>
-          <Text tx="NavigationScreen.sourceInput" style={$inputTitle} />
+          <Text preset="bold" tx="NavigationScreen.sourceInput" style={$inputTitle} />
           <TextInput
             style={styles.input}
             onChangeText={setSource}
@@ -140,7 +146,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           />
         </View>
         <View>
-          <Text tx="NavigationScreen.destInput" style={$inputTitle} />
+          <Text preset="bold" tx="NavigationScreen.destInput" style={$inputTitle} />
           <TextInput
             style={styles.input}
             onChangeText={setDestination}
@@ -190,14 +196,16 @@ const $container: ViewStyle = {
 }
 
 const $title: TextStyle = {
-  marginBottom: spacing.small,
+  // marginBottom: spacing.small,
+  fontSize: spacing.large + spacing.tiny
 }
 
 const $tagline: TextStyle = {
+  fontSize: 14,
   marginBottom: spacing.large,
 }
 
 const $inputTitle: TextStyle = {
   marginBottom: "1%",  
-  fontWeight: "bold",
+  // fontWeight: "bold",
 }

@@ -31,9 +31,8 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
     return (
       <Screen preset="scroll" contentContainerStyle={$container} safeAreaEdges={["top"]}>
         
-        <Text preset="heading" text="All Street Lights" style={$title} />
-        <Text preset="subheading" text="View all the streetlights in the city" style={$subtitle} />
-        
+        <Text preset="bold" text="All Street Lights" style={$title} />
+        <Text text="View all the streetlights in the city" style={$subtitle} />
         
         <MapView 
             style={styles.map} 
@@ -56,24 +55,24 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
   const styles = StyleSheet.create({
     map: {
       width: '100%',
-      height: '90%',
-      
+      height: '88%',
     },
   });
   
   const $container: ViewStyle = {
     height:"100%",
-    paddingTop: spacing.large + spacing.extraLarge,
+    paddingTop: spacing.extraLarge + spacing.small,
     paddingHorizontal: spacing.large,
   }
   
   const $title: TextStyle = {
-    // hello
+    fontSize: spacing.large,
   }
   const $tagline: TextStyle = {
     marginBottom: spacing.huge,
   }
 
   const $subtitle: TextStyle = {
+    marginTop: spacing.tiny,
     marginBottom:spacing.medium
   }
