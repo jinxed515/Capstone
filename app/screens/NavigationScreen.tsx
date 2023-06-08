@@ -23,7 +23,9 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   let destination_coord = {latitude: 12.843911, longitude: 77.671369};
 
   const [route, setRoute] = React.useState([]);
+
   const [alternativeRoutes, setAlternativeRoute] = React.useState([]);
+  const colors = ["#0000FF","#A2A0A0","#A2A0A0","#A2A0A0","#A2A0A0"];
   
   useEffect(() => {
     const fetchData = async () => {
@@ -117,7 +119,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
             <Polyline
               key={index}
               coordinates={route}
-              strokeColor="#000"
+              strokeColor={colors[index]}
               strokeWidth={3}
             />
           ))}
