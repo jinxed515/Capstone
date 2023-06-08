@@ -11,7 +11,7 @@ const palette = {
   neutral300: "#f7c100", // separator
   neutral400: "#f7c100", // border
   neutral500: "#978F8A",
-  neutral600: "#f7c100", // text dim
+  neutral600: "#fdfde0", // text dim
   neutral700: "#3C3836",
   neutral800: "#f7c100", // text
   neutral900: "#000000",

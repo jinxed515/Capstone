@@ -41,7 +41,7 @@ export function DemoNavigator() {
         tabBarHideOnKeyboard: true,
         tabBarStyle: [$tabBar, { height: bottom + 70 }],
         tabBarActiveTintColor: colors.text,
-        tabBarInactiveTintColor: colors.text,
+        tabBarInactiveTintColor: colors.textDim,
         tabBarLabelStyle: $tabBarLabel,
         tabBarItemStyle: $tabBarItem,
       }}
@@ -52,7 +52,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.componentsTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="components" color={focused && colors.tint} size={30} />
+            <Icon icon="components" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       /> */}
@@ -63,7 +63,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.streetLightsTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="components" color={focused && colors.tint} size={30} />
+            <Icon icon="components" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       /> 
@@ -74,7 +74,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.navigationTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="pin" color={focused && colors.tint} size={30} />
+            <Icon icon="pin" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       />
@@ -85,7 +85,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.debugTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="community" color={focused && colors.tint} size={30} />
+            <Icon icon="community" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       />
@@ -96,7 +96,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.podcastListTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="components" color={focused && colors.tint} size={30} />
+            <Icon icon="components" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       />  */}
