@@ -137,7 +137,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
       }
       <KeyboardAvoidingView>
         <View>
-          <Text tx="NavigationScreen.sourceInput" style={$inputTitle} />
+          <Text preset="bold" tx="NavigationScreen.sourceInput" style={$inputTitle} />
           <TextInput
             style={styles.input}
             onChangeText={setSource}
@@ -146,7 +146,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           />
         </View>
         <View>
-          <Text tx="NavigationScreen.destInput" style={$inputTitle} />
+          <Text preset="bold" tx="NavigationScreen.destInput" style={$inputTitle} />
           <TextInput
             style={styles.input}
             onChangeText={setDestination}
@@ -196,14 +196,16 @@ const $container: ViewStyle = {
 }
 
 const $title: TextStyle = {
-  marginBottom: spacing.small,
+  // marginBottom: spacing.small,
+  fontSize: spacing.large + spacing.tiny
 }
 
 const $tagline: TextStyle = {
+  fontSize: 14,
   marginBottom: spacing.large,
 }
 
 const $inputTitle: TextStyle = {
   marginBottom: "1%",  
-  fontWeight: "bold",
+  // fontWeight: "bold",
 }
