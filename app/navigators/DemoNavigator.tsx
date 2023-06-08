@@ -9,6 +9,7 @@ import { DemoCommunityScreen, DemoShowroomScreen, DemoDebugScreen, NavigationScr
 import { DemoPodcastListScreen } from "../screens/DemoPodcastListScreen"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
+import { ViewAllUnsafeRoutes } from "app/screens/ViewAllUnsafeRoutes"
 
 export type DemoTabParamList = {
   Navigate: undefined
@@ -17,6 +18,7 @@ export type DemoTabParamList = {
   DemoDebug: undefined
   DemoPodcastList: undefined
   StreetLights: undefined
+  UnsafePaths:undefined
 }
 
 /**
@@ -63,7 +65,18 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.streetLightsTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="components" color={focused ? colors.tint : colors.textDim} size={30} />
+            <Icon icon="view" color={focused ? colors.tint : colors.textDim} size={30} />
+          ),
+        }}
+      /> 
+      
+      <Tab.Screen
+        name="UnsafePaths"
+        component={ViewAllUnsafeRoutes}
+        options={{
+          tabBarLabel: translate("demoNavigator.ViewAllUnsafeRoutes"),
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="x" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
       /> 

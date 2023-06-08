@@ -117,6 +117,24 @@ const ar: Translations = {
         "لم تتم اضافة اي مفضلات حتى الان. اضغط على القلب في إحدى الحلقات لإضافته الى المفضلة.",
     },
   },
+  ViewAllUnsafeRoutes: {
+    title: "Unsafe Routes Display",
+    accessibility: {
+      cardHint:
+        "Double tap to listen to the episode. Double tap and hold to {{action}} this episode.",
+      switch: "Switch on to only show favorites",
+      favoriteAction: "Toggle Favorite",
+      favoriteIcon: "Episode not favorited",
+      unfavoriteIcon: "Episode favorited",
+      publishLabel: "Published {{date}}",
+      durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
+    },
+    noFavoritesEmptyState: {
+      heading: "This looks a bit empty",
+      content:
+      "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
+    },
+  },
   // @demo remove-block-end
 }
 
