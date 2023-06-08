@@ -148,12 +148,15 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
             placeholder="Enter Ending point"
           />
         </View>
-        <Button
-          onPress={handleSubmit}
-          title="Submit"
-          color="#000"
-          accessibilityLabel="Submit Source & Destination addresses"
-        />
+        <View>
+          <Button
+            onPress={handleSubmit}
+            title="Get Directions"
+            color="#f7c100"
+            accessibilityLabel="Submit Source & Destination addresses"
+          />
+        </View>
+        
       </KeyboardAvoidingView>
     </Screen>
   )
@@ -168,6 +171,8 @@ const styles = StyleSheet.create({
     marginBottom: spacing.large
   },
   input: {
+    backgroundColor: "#ded9db",
+    color: "#00204f",
     height: 40,
     borderColor: "gray",
     borderWidth: 1,

@@ -2,9 +2,8 @@
   "name": "capstone-project",
   "version": "0.0.1",
   "private": true,
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "react-native start",
+    "start": "expo start --dev-client",
     "ios": "react-native run-ios",
     "android": "react-native run-android --active-arch-only",
     "test:detox": "detox test -c ios.sim.debug",
@@ -36,6 +35,8 @@
     "react-error-overlay": "6.0.9"
   },
   "dependencies": {
+    "@expo-google-fonts/comfortaa": "^0.2.3",
+    "@expo-google-fonts/exo-2": "^0.2.3",
     "@expo-google-fonts/space-grotesk": "^0.2.2",
     "@expo/ngrok": "^4.1.0",
     "@expo/webpack-config": "^0.17.4",
@@ -47,7 +48,8 @@
     "@react-navigation/stack": "~6.2.1",
     "apisauce": "2.1.5",
     "date-fns": "^2.29.2",
-    "expo": "^47.0.0",
+    "expo": "~47.0.14",
+    "expo-app-loading": "~2.1.1",
     "expo-application": "~5.0.1",
     "expo-constants": "~14.0.2",
     "expo-device": "~5.0.0",
@@ -63,7 +65,7 @@
     "mobx-react-lite": "3.4.0",
     "mobx-state-tree": "5.1.5",
     "react": "18.1.0",
-    "react-native": "0.70.5",
+    "react-native": "0.70.8",
     "react-native-bootsplash": "4.3.2",
     "react-native-geocoding": "^0.5.0",
     "react-native-gesture-handler": "~2.9.0",

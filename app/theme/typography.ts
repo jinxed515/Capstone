@@ -3,29 +3,29 @@
 
 import { Platform } from "react-native"
 import {
-  SpaceGrotesk_300Light as spaceGroteskLight,
-  SpaceGrotesk_400Regular as spaceGroteskRegular,
-  SpaceGrotesk_500Medium as spaceGroteskMedium,
-  SpaceGrotesk_600SemiBold as spaceGroteskSemiBold,
-  SpaceGrotesk_700Bold as spaceGroteskBold,
-} from "@expo-google-fonts/space-grotesk"
+  Comfortaa_300Light as comfortaaLight,
+  Comfortaa_400Regular as comfortaaRegular,
+  Comfortaa_500Medium as comfortaaMedium,
+  Comfortaa_600SemiBold as comfortaaSemiBold,
+  Comfortaa_700Bold as comfortaaBold,
+} from "@expo-google-fonts/comfortaa"
 
 export const customFontsToLoad = {
-  spaceGroteskLight,
-  spaceGroteskRegular,
-  spaceGroteskMedium,
-  spaceGroteskSemiBold,
-  spaceGroteskBold,
+  comfortaaLight,
+  comfortaaRegular,
+  comfortaaMedium,
+  comfortaaSemiBold,
+  comfortaaBold,
 }
 
 const fonts = {
-  spaceGrotesk: {
+  comfortaa: {
     // Cross-platform Google font.
-    light: "spaceGroteskLight",
-    normal: "spaceGroteskRegular",
-    medium: "spaceGroteskMedium",
-    semiBold: "spaceGroteskSemiBold",
-    bold: "spaceGroteskBold",
+    light: "comfortaaLight",
+    normal: "comfortaaRegular",
+    medium: "comfortaaMedium",
+    semiBold: "comfortaaSemiBold",
+    bold: "comfortaaBold",
   },
   helveticaNeue: {
     // iOS only font.
@@ -59,7 +59,7 @@ export const typography = {
   /**
    * The primary font. Used in most places.
    */
-  primary: fonts.spaceGrotesk,
+  primary: fonts.comfortaa,
   /**
    * An alternate font used for perhaps titles and stuff.
    */

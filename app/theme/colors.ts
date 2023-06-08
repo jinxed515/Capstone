@@ -1,21 +1,26 @@
 // TODO: write documentation for colors and palette in own markdown file and add links from here
 
+// 00204f blue
+// f7c100 yellow
+// ded9db white
+
+
 const palette = {
   neutral100: "#FFFFFF",
-  neutral200: "#F4F2F1",
-  neutral300: "#D7CEC9",
-  neutral400: "#B6ACA6",
+  neutral200: "#00204f", // background
+  neutral300: "#f7c100", // separator
+  neutral400: "#f7c100", // border
   neutral500: "#978F8A",
-  neutral600: "#564E4A",
+  neutral600: "#f7c100", // text dim
   neutral700: "#3C3836",
-  neutral800: "#191015",
+  neutral800: "#f7c100", // text
   neutral900: "#000000",
 
   primary100: "#F4E0D9",
   primary200: "#E8C1B4",
   primary300: "#DDA28E",
   primary400: "#D28468",
-  primary500: "#C76542",
+  primary500: "#f7c100", // tint
   primary600: "#A54F31",
 
   secondary100: "#DCDDE9",
@@ -31,7 +36,7 @@ const palette = {
   accent500: "#FFBB50",
 
   angry100: "#F2D6CD",
-  angry500: "#C03403",
+  angry500: "#ded9db", // error
 
   overlay20: "rgba(25, 16, 21, 0.2)",
   overlay50: "rgba(25, 16, 21, 0.5)",

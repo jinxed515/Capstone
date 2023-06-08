@@ -49,19 +49,12 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
         <ListItem
           LeftComponent={
             <View style={$item}>
-              <Text preset="bold">App Id</Text>
+              <Text preset="bold">User Name</Text>
               <Text>{Application.applicationId}</Text>
             </View>
           }
         />
-        <ListItem
-          LeftComponent={
-            <View style={$item}>
-              <Text preset="bold">App Name</Text>
-              <Text>{Application.applicationName}</Text>
-            </View>
-          }
-        />
+        
         <ListItem
           LeftComponent={
             <View style={$item}>
@@ -131,7 +124,7 @@ const $buttonContainer: ViewStyle = {
 }
 
 const $hint: TextStyle = {
-  color: colors.palette.neutral600,
+  color: colors.palette.neutral200,
   fontSize: 12,
   lineHeight: 15,
   paddingBottom: spacing.large,
