@@ -3,11 +3,9 @@ import { TextStyle, ViewStyle, StyleSheet, View, Dimensions, Button, TextInput, 
 import { Card, Screen, Text, TextField } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
-import { openLinkInBrowser } from "../utils/openLinkInBrowser"
-import { isRTL } from "../i18n"
 import MapView, { Callout, Marker, Polyline } from 'react-native-maps';
 import { getRouteCoordinate, getAlternativeRouteCoordinates } from "../GoogleAPI"
-import { de } from "date-fns/locale"
+import { isCoordinateSafe, routeRating, safetyRatingRoutes } from "app/SafetyScore"
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
@@ -38,7 +36,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
         const convertedCoordinates = decoded_routes.map(([latitude, longitude]) =>
           JSON.parse(`{"latitude": ${latitude}, "longitude": ${longitude}}`)
         );
-        console.log(convertedCoordinates);
+        // console.log(convertedCoordinates);
         setRoute(convertedCoordinates);
       } catch (error) {
         console.error('Error in fetching RouteCoordinates:', error);
@@ -65,8 +63,14 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           latitude: innerArray[0],
           longitude: innerArray[1]
         })));
-        setAlternativeRoute(convertedCoordinates);
-        console.log(convertedCoordinates);
+        const sortOrder = safetyRatingRoutes(convertedCoordinates);
+        convertedCoordinates.sort((a, b) => {
+          const indexA = sortOrder[convertedCoordinates.indexOf(a)];
+          const indexB = sortOrder[convertedCoordinates.indexOf(b)];
+          return indexB - indexA;
+        });
+        setAlternativeRoute(convertedCoordinates);      // SAFEST route in the front
+        // console.log(convertedCoordinates);
       } catch (error) {
         console.error('Error in fetching alternativeRouteCoordinates:', error);
       }
