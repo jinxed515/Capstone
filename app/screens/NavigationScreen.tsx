@@ -24,11 +24,11 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
 
   const [route, setRoute] = React.useState([]);
   const [alternativeRoutes, setAlternativeRoute] = React.useState([]);
-  const polyline = require('@mapbox/polyline');
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const polyline = require('@mapbox/polyline');
         const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
         const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
         const routeCoordinates = await getRouteCoordinate(origin, destination);
@@ -36,7 +36,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
         const convertedCoordinates = decoded_routes.map(([latitude, longitude]) =>
           JSON.parse(`{"latitude": ${latitude}, "longitude": ${longitude}}`)
         );
-        // console.log(convertedCoordinates);
+        console.log(convertedCoordinates);
         setRoute(convertedCoordinates);
       } catch (error) {
         console.error('Error in fetching RouteCoordinates:', error);
@@ -49,17 +49,22 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const polyline = require('@mapbox/polyline');
         const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
         const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
         const allRouteCoordinates = await getAlternativeRouteCoordinates(origin, destination);
-        const decoded_routes = allRouteCoordinates.map(polyline.decode);
-        console.log(decoded_routes);
-        // const convertedCoordinates = decoded_routes.map(([decoded_route]) => {
-        //   return decoded_route.map(([latitude, longitude]) => {
-        //     return JSON.parse(`{"latitude": ${latitude}, "longitude": ${longitude}}`);
-        //   });
-        // });        
-        // setAlternativeRoute(convertedCoordinates);
+        var decoded_routes = [];
+        for (var i = 0; i < allRouteCoordinates.length; i++) {
+          const decoded_route = polyline.decode(allRouteCoordinates[i]);
+          decoded_routes.push(decoded_route);
+          // console.log("route", i+1, ":", decoded_route);
+        }
+        const convertedCoordinates = decoded_routes.map(subArray => subArray.map(innerArray => ({
+          latitude: innerArray[0],
+          longitude: innerArray[1]
+        })));
+        setAlternativeRoute(convertedCoordinates);
+        console.log(convertedCoordinates);
       } catch (error) {
         console.error('Error in fetching alternativeRouteCoordinates:', error);
       }
@@ -111,7 +116,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           {alternativeRoutes.map((route, index) => (
             <Polyline
               key={index}
-              coordinates={route.overview_polyline.points}
+              coordinates={route}
               strokeColor="#000"
               strokeWidth={3}
             />
