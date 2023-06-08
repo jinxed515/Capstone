@@ -120,6 +120,24 @@ const ko: Translations = {
       content: "즐겨찾기가 없습니다. 에피소드에 있는 하트를 눌러서 즐겨찾기에 추가하세요.",
     },
   },
+  ViewAllUnsafeRoutes: {
+    title: "Unsafe Routes Display",
+    accessibility: {
+      cardHint:
+        "Double tap to listen to the episode. Double tap and hold to {{action}} this episode.",
+      switch: "Switch on to only show favorites",
+      favoriteAction: "Toggle Favorite",
+      favoriteIcon: "Episode not favorited",
+      unfavoriteIcon: "Episode favorited",
+      publishLabel: "Published {{date}}",
+      durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
+    },
+    noFavoritesEmptyState: {
+      heading: "This looks a bit empty",
+      content:
+      "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
+    },
+  },
   // @demo remove-block-end
 }
 

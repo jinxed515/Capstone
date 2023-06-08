@@ -1,6 +1,6 @@
 import React, {FC} from "react"
 import { TextStyle, ViewStyle, StyleSheet, Image } from "react-native"
-import { Screen, Text } from "../components"
+import { Card, Screen, Text } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
 import MapView, { Marker, Polyline } from 'react-native-maps';
@@ -30,7 +30,11 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
 
     return (
       <Screen preset="scroll" contentContainerStyle={$container} safeAreaEdges={["top"]}>
-        <Text preset="heading" tx="NavigationScreen.title" style={$title} />
+        
+        <Text preset="heading" text="All Street Lights" style={$title} />
+        <Text preset="subheading" text="View all the streetlights in the city" style={$subtitle} />
+        
+        
         <MapView 
             style={styles.map} 
             region={mapRegion} 
@@ -53,6 +57,7 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
     map: {
       width: '100%',
       height: '90%',
+      
     },
   });
   
@@ -63,8 +68,12 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
   }
   
   const $title: TextStyle = {
-    marginBottom: spacing.small,
+    // hello
   }
   const $tagline: TextStyle = {
     marginBottom: spacing.huge,
+  }
+
+  const $subtitle: TextStyle = {
+    marginBottom:spacing.medium
   }

@@ -12,6 +12,7 @@ const en = {
     exciting: "(ohh, this is exciting!)",
     letsGo: "Let's go!", // @demo remove-current-line
   },
+
   errorScreen: {
     title: "Something went wrong!",
     friendlySubtitle:
@@ -41,6 +42,7 @@ const en = {
     tapToSignIn: "Tap to sign in!",
     hint: "Hint: you can use any email address and your favorite password :)",
   },
+
   demoNavigator: {
     componentsTab: "Components",
     debugTab: "Profile",
@@ -48,6 +50,7 @@ const en = {
     navigationTab:"Navigate",
     podcastListTab: "Podcast",
     streetLightsTab: "Lights",
+    ViewAllUnsafeRoutes: "UnsafePaths"
   },
   demoCommunityScreen: {
     title: "Connect with the community",
@@ -131,6 +134,24 @@ const en = {
       heading: "This looks a bit empty",
       content:
       "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
+    },
+  },
+  ViewAllUnsafeRoutes: {
+    title: "Unsafe Routes",
+    subtitle:"view all the routes that have been marked as unsafe",
+    accessibility: {
+      cardHint:
+        "Double tap to listen to the episode. Double tap and hold to {{action}} this episode.",
+      switch: "Switch on to only show favorites",
+      favoriteAction: "Toggle Favorite",
+      favoriteIcon: "Episode not favorited",
+      unfavoriteIcon: "Episode favorited",
+      publishLabel: "Published {{date}}",
+      durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
+    },
+    noFavoritesEmptyState: {
+      heading: "This looks a bit empty",
+      content:"No Unsafe Routes to display.",
     },
   },
   // @demo remove-block-end
