@@ -7,9 +7,9 @@ const en = {
   },
   welcomeScreen: {
     postscript:
-      "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
-    readyForLaunch: "Your app, almost ready for launch!",
-    exciting: "(ohh, this is exciting!)",
+      "Our app will only give you directions that pass through well lit areas and avoid all those spaces which are pitch black!",
+    readyForLaunch: "Welcome to Lumos!",
+    exciting: "The answer to all the times when you walked into dark streets",
     letsGo: "Let's go!", // @demo remove-current-line
   },
 
