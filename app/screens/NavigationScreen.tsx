@@ -20,13 +20,16 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
     longitudeDelta: 0.02072509378194809
   });
 
-  let source_coord = {latitude: 12.84871, longitude: 77.657882};
-  let destination_coord = {latitude: 12.843911, longitude: 77.671369};
+  // {latitude: 12.84871, longitude: 77.657882}
+  let [source_coord, setSourceCoord] = React.useState(null);
+  // {latitude: 12.843911, longitude: 77.671369}
+  let [destination_coord, setDestCoord] = React.useState(null);
 
   const [route, setRoute] = React.useState([]);
 
   const [alternativeRoutes, setAlternativeRoute] = React.useState([]);
   const colors = ["#0000FF","#A2A0A0","#A2A0A0","#A2A0A0","#A2A0A0"];
+  const width = [6,3,3,3,3];
   
   useEffect(() => {
     const fetchData = async () => {
@@ -72,6 +75,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           const indexB = sortOrder[convertedCoordinates.indexOf(b)];
           return indexB - indexA;
         });
+        console.log(convertedCoordinates.length, convertedCoordinates);
         setAlternativeRoute(convertedCoordinates);      // SAFEST route in the front
         // console.log(convertedCoordinates);
       } catch (error) {
@@ -88,15 +92,38 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   const [marker, setMarker] = React.useState<boolean>(false);
 
   const handleSubmit = () => {
-    if (source.length == 0) { 
+    if (source_coord == null) { 
       console.log("Source Address REQUIRED.") 
-    } else if (destination.length == 0) { 
+    } else if (destination_coord == null) { 
       console.log("Destination Address REQUIRED.") 
     } else {
-      console.log("SOURCE      : ", source);
-      console.log("DESTINATION : ", destination);
+      console.log("SOURCE      : ", source_coord);
+      console.log("DESTINATION : ", destination_coord);
       setMarker(true);
     }
+  }
+
+  const fooFetchPlaceDetails = async (placeId) => {
+    try {
+      // const placeId = 'ChIJL03jEYsVrjsRD9iLq9vbSl8';
+      const result = await fetchPlaceDetails(placeId);
+      return result;
+    } catch (error) {
+      console.error('Error getting location coordinates:', error);
+      return error;
+    }
+  }
+
+  const handleSourceLocation = async (data) => {
+    console.log("place id (SOURCE):", data.place_id);
+    const coord = await fooFetchPlaceDetails(data.place_id);
+    setSourceCoord(coord);
+  }
+
+  const handleDestLocation = async (data) => {
+    console.log("place id (DESTINATION):", data.place_id);
+    const coord = await fooFetchPlaceDetails(data.place_id);
+    setDestCoord(coord);
   }
 
   return (
@@ -127,7 +154,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
               key={index}
               coordinates={route}
               strokeColor={colors[index]}
-              strokeWidth={3}
+              strokeWidth={width[index]}
             />
           ))}
         </MapView>
@@ -144,10 +171,10 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           <GooglePlacesAutocomplete
             styles = {{textInput: styles.input}}
             placeholder='Enter Starting point'
-            onPress={(data, details = null) => {
-              console.log("place id (SOURCE):", data.place_id);
-              // console.log(fetchPlaceDetails(data.place_id));
-            }}
+            // onPress={(data, details = null) => {
+            //   console.log("place id (SOURCE):", data.place_id);
+            // }}
+            onPress={handleSourceLocation}
             query={{
               key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',
               language: 'en',
@@ -158,10 +185,10 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           <GooglePlacesAutocomplete
             styles = {{textInput: styles.input}}
             placeholder='Enter Ending point'
-            onPress={(data, details = null) => {
-              console.log("place id (DESTINATION):", data.place_id);
-              // console.log(fetchPlaceDetails(data.place_id));
-            }}
+            // onPress={(data, details = null) => {
+            //   console.log("place id (DESTINATION):", data.place_id);
+            // }}
+            onPress={handleDestLocation}
             query={{
               key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',
               language: 'en',

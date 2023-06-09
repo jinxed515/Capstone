@@ -32,10 +32,12 @@ export const getAlternativeRouteCoordinates = async (origin, destination) => {
 
 export const fetchPlaceDetails = async (placeId) => {
   try {
-        const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(placeId)}&key=${GOOGLE_MAPS_API_KEY}`;
+        const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_MAPS_API_KEY}`;
         const response = await fetch(url);
         const data = await response.json();
-        return data.result.geometry.location;
+        const coordinates = data.result.geometry.location;
+        const result = {"latitude": coordinates.lat, "longitude": coordinates.lng};
+        return result;
     } catch (error) {
         console.error('Error getting location coordinates:', error);
         throw error;
