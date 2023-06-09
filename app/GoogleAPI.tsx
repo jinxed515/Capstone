@@ -31,4 +31,17 @@ export const getAlternativeRouteCoordinates = async (origin, destination) => {
         throw error;
     }
 };
-  
+
+const fetchPlaceDetails = async (placeId) => {
+  const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_MAPS_API_KEY}`;
+
+  try {
+    const response = await axios.get(url);
+    const placeDetails = response.data.result;
+    console.log(placeDetails);
+    // Process the place details as needed
+  } catch (error) {
+    console.error(error);
+  }
+};
