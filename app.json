@@ -10,8 +10,8 @@
     "icon": "./assets/images/app-icon-all.png",
     "splash": {
       "image": "./assets/images/splash-logo-all.png",
-      "resizeMode": "stretchr",
-      "backgroundColor": "#191015"
+      "resizeMode": "stretch",
+      "backgroundColor": "#00204f"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
