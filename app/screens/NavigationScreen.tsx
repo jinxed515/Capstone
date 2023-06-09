@@ -4,7 +4,7 @@ import { Card, Screen, Text, TextField } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
 import MapView, { Callout, Marker, Polyline } from 'react-native-maps';
-import { getRouteCoordinate, getAlternativeRouteCoordinates } from "../GoogleAPI"
+import { getRouteCoordinate, getAlternativeRouteCoordinates, fetchPlaceDetails } from "../GoogleAPI"
 import { isCoordinateSafe, routeRating, safetyRatingRoutes } from "app/SafetyScore"
 import Constants from "expo-constants";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -139,53 +139,28 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
         /> 
       }
       <KeyboardAvoidingView>
-
-      
-
-
-
-        {/* <View>
-          <Text preset="bold" tx="NavigationScreen.sourceInput" style={$inputTitle} />
-          <TextInput
-            style={styles.input}
-            onChangeText={setSource}
-            value={source}
-            placeholder="Enter Starting point"
-          />
-        </View>
-        
-        <View>
-          <Text preset="bold" tx="NavigationScreen.destInput" style={$inputTitle} />
-          <TextInput
-            style={styles.input}
-            onChangeText={setDestination}
-            value={destination}
-            placeholder="Enter Ending point"
-          />
-        </View> */}
         <View style = {styles.searchContainer}>
-          <Text preset="formLabel">Origin Location </Text>
+          <Text preset="bold" tx="NavigationScreen.sourceInput" style={$inputTitle} />
           <GooglePlacesAutocomplete
-            
             styles = {{textInput: styles.input}}
             placeholder='Enter Starting point'
             onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              console.log(data, details);
+              console.log("place id (SOURCE):", data.place_id);
+              // console.log(fetchPlaceDetails(data.place_id));
             }}
             query={{
               key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',
               language: 'en',
             }}
           />
-          <Text preset="formLabel">Destination Location </Text>
 
+          <Text preset="bold" tx="NavigationScreen.destInput" style={$inputTitle} />
           <GooglePlacesAutocomplete
             styles = {{textInput: styles.input}}
             placeholder='Enter Ending point'
             onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              console.log(data, details);
+              console.log("place id (DESTINATION):", data.place_id);
+              // console.log(fetchPlaceDetails(data.place_id));
             }}
             query={{
               key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',
@@ -198,8 +173,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
             color="#f7c100"
             accessibilityLabel="Submit Source & Destination addresses"
           />
-        </View>
-        
+        </View>        
       </KeyboardAvoidingView>
     </Screen>
   )
@@ -228,15 +202,10 @@ const styles = StyleSheet.create({
   searchContainer: {
     position: "absolute",
     width: "100%",
-    backgroundColor: "white",
-    shadowColor: "black",
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
+    shadowColor: "transparent",
     elevation: 4,
     padding: 8,
-    borderRadius: 8,
-    top: Constants.statusBarHeight,
+    marginTop: spacing.small
   },
 });
 
@@ -244,7 +213,7 @@ const $container: ViewStyle = {
   flex: 1, 
   // justifyContent: 'center',
   height:"100%",
-  paddingTop: "1%",
+  paddingTop: spacing.large,
   paddingHorizontal: spacing.large,
 }
 
