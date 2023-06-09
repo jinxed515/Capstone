@@ -36,8 +36,8 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
       .then((info) => {
         console.log(info.feeds[0].field1);
         if (info.feeds[0].field1 < 4095) markers.push({
-          "longitude": 77.653861,
-          "latitude": 12.83975
+          "longitude": 77.55471519999999,
+          "latitude": 13.011023
         });
       });
 
@@ -46,8 +46,8 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
       .then((info) => {
         console.log(info.feeds[0].field1);
         if (info.feeds[0].field1 < 4095) markers.push({
-          "longitude": 77.653861,
-          "latitude": 12.83975
+          "longitude": 77.5711719,
+          "latitude": 12.9916302
         });
       });
 

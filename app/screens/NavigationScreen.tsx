@@ -75,7 +75,6 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           const indexB = sortOrder[convertedCoordinates.indexOf(b)];
           return indexB - indexA;
         });
-        console.log(convertedCoordinates.length, convertedCoordinates);
         setAlternativeRoute(convertedCoordinates);      // SAFEST route in the front
         // console.log(convertedCoordinates);
       } catch (error) {
@@ -118,12 +117,14 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
     console.log("place id (SOURCE):", data.place_id);
     const coord = await fooFetchPlaceDetails(data.place_id);
     setSourceCoord(coord);
+    console.log("source", source_coord);
   }
 
   const handleDestLocation = async (data) => {
     console.log("place id (DESTINATION):", data.place_id);
     const coord = await fooFetchPlaceDetails(data.place_id);
     setDestCoord(coord);
+    console.log("destination", destination_coord);
   }
 
   return (
