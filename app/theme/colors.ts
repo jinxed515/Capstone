@@ -7,7 +7,7 @@
 
 const palette = {
   neutral100: "#FFFFFF",
-  neutral200: "#00204f", // background
+  neutral200: "#ded9db", // background
   neutral300: "#f7c100", // separator
   neutral400: "#f7c100", // border
   neutral500: "#978F8A",
