@@ -34,7 +34,7 @@ export const safetyRatingRoutes = (routes) => {
     let result = Array(length).fill(0);
 
     for(var i = 0; i < length; i++) {
-        result[i] = routeRating(routes[i]);
+        result[i] = routeRating(routes[i]) / routes[i].length;
     }
 
     console.log(result);
