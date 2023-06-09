@@ -6,6 +6,9 @@ import { spacing } from "../theme"
 import MapView, { Callout, Marker, Polyline } from 'react-native-maps';
 import { getRouteCoordinate, getAlternativeRouteCoordinates } from "../GoogleAPI"
 import { isCoordinateSafe, routeRating, safetyRatingRoutes } from "app/SafetyScore"
+import Constants from "expo-constants";
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
@@ -136,7 +139,12 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
         /> 
       }
       <KeyboardAvoidingView>
-        <View>
+
+      
+
+
+
+        {/* <View>
           <Text preset="bold" tx="NavigationScreen.sourceInput" style={$inputTitle} />
           <TextInput
             style={styles.input}
@@ -145,6 +153,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
             placeholder="Enter Starting point"
           />
         </View>
+        
         <View>
           <Text preset="bold" tx="NavigationScreen.destInput" style={$inputTitle} />
           <TextInput
@@ -153,8 +162,36 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
             value={destination}
             placeholder="Enter Ending point"
           />
-        </View>
-        <View>
+        </View> */}
+        <View style = {styles.searchContainer}>
+          <Text preset="formLabel">Origin Location </Text>
+          <GooglePlacesAutocomplete
+            
+            styles = {{textInput: styles.input}}
+            placeholder='Enter Starting point'
+            onPress={(data, details = null) => {
+              // 'details' is provided when fetchDetails = true
+              console.log(data, details);
+            }}
+            query={{
+              key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',
+              language: 'en',
+            }}
+          />
+          <Text preset="formLabel">Destination Location </Text>
+
+          <GooglePlacesAutocomplete
+            styles = {{textInput: styles.input}}
+            placeholder='Enter Ending point'
+            onPress={(data, details = null) => {
+              // 'details' is provided when fetchDetails = true
+              console.log(data, details);
+            }}
+            query={{
+              key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',
+              language: 'en',
+            }}
+          />
           <Button
             onPress={handleSubmit}
             title="Get Directions"
@@ -174,7 +211,9 @@ const styles = StyleSheet.create({
   map: {
     height: '50%',
     width: '100%',
-    marginBottom: spacing.large
+    paddingTop: spacing.large + spacing.extraLarge,
+    paddingHorizontal: spacing.large,
+    // marginBottom: spacing.large + spacing.extraLarge
   },
   input: {
     backgroundColor: "#ded9db",
@@ -186,13 +225,27 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: spacing.medium,
   },
+  searchContainer: {
+    position: "absolute",
+    width: "100%",
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 4,
+    padding: 8,
+    borderRadius: 8,
+    top: Constants.statusBarHeight,
+  },
 });
 
 const $container: ViewStyle = {
   flex: 1, 
-  justifyContent: 'center',
+  // justifyContent: 'center',
   height:"100%",
-  padding: spacing.large,
+  paddingTop: "1%",
+  paddingHorizontal: spacing.large,
 }
 
 const $title: TextStyle = {
