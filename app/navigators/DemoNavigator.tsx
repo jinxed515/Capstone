@@ -42,7 +42,7 @@ export function DemoNavigator() {
         headerShown: false,
         tabBarHideOnKeyboard: true,
         tabBarStyle: [$tabBar, { height: bottom + 90 }],
-        tabBarActiveTintColor: colors.text,
+        tabBarActiveTintColor: "#f7c100",
         tabBarInactiveTintColor: colors.textDim,
         tabBarLabelStyle: $tabBarLabel,
         tabBarItemStyle: $tabBarItem,
@@ -65,11 +65,11 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.streetLightsTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="view" color={focused ? colors.tint : colors.textDim} size={30} />
+            <Icon icon="view" color={focused ? "#f7c100" : colors.textDim} size={30} />
           ),
         }}
       /> 
-      
+{/*       
       <Tab.Screen
         name="UnsafePaths"
         component={ViewAllUnsafeRoutes}
@@ -79,7 +79,7 @@ export function DemoNavigator() {
             <Icon icon="x" color={focused ? colors.tint : colors.textDim} size={30} />
           ),
         }}
-      /> 
+      />  */}
 
       <Tab.Screen
         name="Navigate"
@@ -87,7 +87,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.navigationTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="pin" color={focused ? colors.tint : colors.textDim} size={30} />
+            <Icon icon="pin" color={focused ? "#f7c100" : colors.textDim} size={30} />
           ),
         }}
       />
@@ -98,7 +98,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.debugTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="community" color={focused ? colors.tint : colors.textDim} size={30} />
+            <Icon icon="community" color={focused ? "#f7c100" : colors.textDim} size={30} />
           ),
         }}
       />
@@ -119,7 +119,7 @@ export function DemoNavigator() {
 }
 
 const $tabBar: ViewStyle = {
-  backgroundColor: colors.background_tab,
+  backgroundColor: "#00204f",
   borderTopColor: colors.transparent,
 }
 
