@@ -48,8 +48,8 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
           tx="welcomeScreen.readyForLaunch"
           preset="heading"
         />
-        <Text tx="welcomeScreen.exciting" preset="subheading" />
-        <Image style={$welcomeFace} source={welcomeFace} resizeMode="contain" />
+        <Text tx="welcomeScreen.exciting" preset="subheading" style={{color:"white"}}/>
+        
       </View>
 
       <View style={[$bottomContainer, $bottomContainerInsets]}>
@@ -69,7 +69,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
 
 const $container: ViewStyle = {
   flex: 1,
-  backgroundColor: colors.background,
+  backgroundColor: "#00204f",
 }
 
 const $topContainer: ViewStyle = {
@@ -107,4 +107,5 @@ const $welcomeFace: ImageStyle = {
 
 const $welcomeHeading: TextStyle = {
   marginBottom: spacing.medium,
+  color:"white"
 }
