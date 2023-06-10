@@ -76,7 +76,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           return indexB - indexA;
         });
         setAlternativeRoute(convertedCoordinates);      // SAFEST route in the front
-        // console.log(convertedCoordinates);
+        console.log(convertedCoordinates);
       } catch (error) {
         console.error('Error in fetching alternativeRouteCoordinates:', error);
       }
