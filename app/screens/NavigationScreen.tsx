@@ -145,9 +145,9 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           <GooglePlacesAutocomplete
             styles = {{textInput: styles.input}}
             placeholder='Enter Starting point'
-            // onPress={(data, details = null) => {
-            //   console.log("place id (SOURCE):", data.place_id);
-            // }}
+            textInputProps={{
+              selectTextOnFocus: true,
+            }}
             onPress={handleSourceLocation}
             query={{
               key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',
@@ -159,9 +159,9 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           <GooglePlacesAutocomplete
             styles = {{textInput: styles.input}}
             placeholder='Enter Ending point'
-            // onPress={(data, details = null) => {
-            //   console.log("place id (DESTINATION):", data.place_id);
-            // }}
+            textInputProps={{
+              selectTextOnFocus: true,
+            }}
             onPress={handleDestLocation}
             query={{
               key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',
