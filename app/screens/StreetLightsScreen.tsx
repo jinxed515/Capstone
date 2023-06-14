@@ -57,6 +57,7 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
           latitude: marker.latitude,
           longitude: marker.longitude,
         }}
+        image={require('../../assets/icons/customMarkerIcon.png')}
       />
     )
   }
@@ -109,14 +110,8 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
         showsUserLocation={true}
       >
         {mapMarkers()}
-        {/* <Polyline
-            coordinates={[
-              
-            ]}
-            strokeColor="#0000FF"
-            strokeWidth={6}
-          /> */}
       </MapView>
+
     </Screen>
   )
 }
