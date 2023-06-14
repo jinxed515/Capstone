@@ -31,62 +31,34 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   const colors = ["#0000FF","#A2A0A0","#A2A0A0","#A2A0A0","#A2A0A0"];
   const width = [6,3,3,3,3];
   
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const polyline = require('@mapbox/polyline');
-        const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
-        const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
-        const routeCoordinates = await getRouteCoordinate(origin, destination);
-        const decoded_routes = polyline.decode(routeCoordinates);
-        const convertedCoordinates = decoded_routes.map(([latitude, longitude]) =>
-          JSON.parse(`{"latitude": ${latitude}, "longitude": ${longitude}}`)
-        );
-        // console.log(convertedCoordinates);
-        setRoute(convertedCoordinates);
-      } catch (error) {
-        console.error('Error in fetching RouteCoordinates:', error);
+  const fetchData = async () => {
+    try {
+      const polyline = require('@mapbox/polyline');
+      const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
+      const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
+      const allRouteCoordinates = await getAlternativeRouteCoordinates(origin, destination);
+      var decoded_routes = [];
+      for (var i = 0; i < allRouteCoordinates.length; i++) {
+        const decoded_route = polyline.decode(allRouteCoordinates[i]);
+        decoded_routes.push(decoded_route);
+        // console.log("route", i+1, ":", decoded_route);
       }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const polyline = require('@mapbox/polyline');
-        const origin = { lat: source_coord.latitude, lng: source_coord.longitude };
-        const destination = { lat: destination_coord.latitude, lng: destination_coord.longitude }; 
-        const allRouteCoordinates = await getAlternativeRouteCoordinates(origin, destination);
-        var decoded_routes = [];
-        for (var i = 0; i < allRouteCoordinates.length; i++) {
-          const decoded_route = polyline.decode(allRouteCoordinates[i]);
-          decoded_routes.push(decoded_route);
-          // console.log("route", i+1, ":", decoded_route);
-        }
-        const convertedCoordinates = decoded_routes.map(subArray => subArray.map(innerArray => ({
-          latitude: innerArray[0],
-          longitude: innerArray[1]
-        })));
-        const sortOrder = safetyRatingRoutes(convertedCoordinates);
-        convertedCoordinates.sort((a, b) => {
-          const indexA = sortOrder[convertedCoordinates.indexOf(a)];
-          const indexB = sortOrder[convertedCoordinates.indexOf(b)];
-          return indexB - indexA;
-        });
-        setAlternativeRoute(convertedCoordinates);      // SAFEST route in the front
-        console.log(convertedCoordinates);
-      } catch (error) {
-        console.error('Error in fetching alternativeRouteCoordinates:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const [source, setSource] = React.useState<string>('');
-  const [destination, setDestination] = React.useState<string>('');
+      const convertedCoordinates = decoded_routes.map(subArray => subArray.map(innerArray => ({
+        latitude: innerArray[0],
+        longitude: innerArray[1]
+      })));
+      const sortOrder = safetyRatingRoutes(convertedCoordinates);
+      convertedCoordinates.sort((a, b) => {
+        const indexA = sortOrder[convertedCoordinates.indexOf(a)];
+        const indexB = sortOrder[convertedCoordinates.indexOf(b)];
+        return indexB - indexA;
+      });
+      setAlternativeRoute(convertedCoordinates);      // SAFEST route in the front
+      console.log(convertedCoordinates);
+    } catch (error) {
+      console.error('Error in fetching alternativeRouteCoordinates:', error);
+    }
+  };
 
   const [marker, setMarker] = React.useState<boolean>(false);
 
@@ -99,6 +71,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
       console.log("SOURCE      : ", source_coord);
       console.log("DESTINATION : ", destination_coord);
       setMarker(true);
+      fetchData();
     }
   }
 
@@ -172,9 +145,9 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           <GooglePlacesAutocomplete
             styles = {{textInput: styles.input}}
             placeholder='Enter Starting point'
-            // onPress={(data, details = null) => {
-            //   console.log("place id (SOURCE):", data.place_id);
-            // }}
+            textInputProps={{
+              selectTextOnFocus: true,
+            }}
             onPress={handleSourceLocation}
             query={{
               key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',
@@ -186,9 +159,9 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           <GooglePlacesAutocomplete
             styles = {{textInput: styles.input}}
             placeholder='Enter Ending point'
-            // onPress={(data, details = null) => {
-            //   console.log("place id (DESTINATION):", data.place_id);
-            // }}
+            textInputProps={{
+              selectTextOnFocus: true,
+            }}
             onPress={handleDestLocation}
             query={{
               key: 'AIzaSyCvZ7sW6G28tDmOE4RX7h9-PGnI5M7WkFY',

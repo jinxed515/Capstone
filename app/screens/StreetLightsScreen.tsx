@@ -17,13 +17,12 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
   };
 
   const mapMarkers = () => {
-
      
     fetch("https://api.thingspeak.com/channels/2182368/fields/1.json?api_key=63Z862MQUNXJHEDR&results=1")
       .then((response) => response.json())
       .then((info) => {
-        console.log(info.feeds[0].field1);
-        console.log("Added");
+        // console.log(info.feeds[0].field1);
+        // console.log("Added");
         if (info.feeds[0].field1 < 4095) markers.push({
           "longitude": 77.5655,
           "latitude": 12.9410
@@ -34,7 +33,7 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
     fetch("https://api.thingspeak.com/channels/2182371/fields/1.json?api_key=5MS1IBYEGBZHRUD9&results=1")
       .then((response) => response.json())
       .then((info) => {
-        console.log(info.feeds[0].field1);
+        // console.log(info.feeds[0].field1);
         if (info.feeds[0].field1 < 4095) markers.push({
           "longitude": 77.55471519999999,
           "latitude": 13.011023
@@ -44,7 +43,7 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
    fetch("https://api.thingspeak.com/channels/2182363/fields/1.json?api_key=2OVS23NM20RXQG7G&results=1")
       .then((response) => response.json())
       .then((info) => {
-        console.log(info.feeds[0].field1);
+        // console.log(info.feeds[0].field1);
         if (info.feeds[0].field1 < 4095) markers.push({
           "longitude": 77.5711719,
           "latitude": 12.9916302
@@ -67,8 +66,8 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
     fetch("https://api.thingspeak.com/channels/2182368/fields/1.json?api_key=63Z862MQUNXJHEDR&results=1")
       .then((response) => response.json())
       .then((info) => {
-        console.log(info.feeds[0].field1);
-        console.log("Added");
+        // console.log(info.feeds[0].field1);
+        // console.log("Added");
         if (info.feeds[0].field1 < 4095) markers.push({
           longitude: 77.5655,
           latitude: 12.9410
@@ -79,7 +78,7 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
     fetch("https://api.thingspeak.com/channels/2182371/fields/1.json?api_key=5MS1IBYEGBZHRUD9&results=1")
       .then((response) => response.json())
       .then((info) => {
-        console.log(info.feeds[0].field1);
+        // console.log(info.feeds[0].field1);
         if (info.feeds[0].field1 < 4095) markers.push({
           longitude: 77.653861,
           latitude: 12.83975
@@ -89,7 +88,7 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
     fetch("https://api.thingspeak.com/channels/2182363/fields/1.json?api_key=2OVS23NM20RXQG7G&results=1")
       .then((response) => response.json())
       .then((info) => {
-        console.log(info.feeds[0].field1);
+        // console.log(info.feeds[0].field1);
         if (info.feeds[0].field1 < 4095) markers.push({
           longitude: 77.653861,
           latitude: 12.83975

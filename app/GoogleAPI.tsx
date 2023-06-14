@@ -23,6 +23,7 @@ export const getAlternativeRouteCoordinates = async (origin, destination) => {
         var points = data.routes.map(function(route) {
             return route.overview_polyline.points;
           });
+        console.log(points);
         return points;
     } catch (error) {
         console.error('Error getting route coordinates:', error);
