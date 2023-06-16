@@ -57,7 +57,7 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
           latitude: marker.latitude,
           longitude: marker.longitude,
         }}
-        image={require('../../assets/icons/customMarkerIcon.png')}
+        image={require('../../assets/icons/customMarker.png')}
       />
     )
   }
