@@ -142,6 +142,7 @@ const $textField: ViewStyle = {
 
 const $tapButton: ViewStyle = {
   marginTop: spacing.extraSmall,
+  backgroundColor:"#00204f"
 }
 
 // @demo remove-file

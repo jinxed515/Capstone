@@ -10,6 +10,7 @@ import Constants from "expo-constants";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 
+
 export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function NavigationScreen(
   _props,
 ) {
@@ -63,6 +64,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
   const [marker, setMarker] = React.useState<boolean>(false);
 
   const handleSubmit = () => {
+    setReceivedSubmit(true);
     if (source_coord == null) { 
       console.log("Source Address REQUIRED.") 
     } else if (destination_coord == null) { 
@@ -100,6 +102,14 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
     console.log("destination", destination_coord);
   }
 
+  //submit button
+  const [receivedSubmit, setReceivedSubmit] = useState(false);
+
+  useEffect(() => {
+    setReceivedSubmit(false);
+  }, [])
+  
+
   return (
     <Screen preset="scroll" contentContainerStyle={$container} style={styles.container} safeAreaEdges={["top"]}>
       <Text preset="heading" tx="NavigationScreen.title" style={$title} />
@@ -133,11 +143,13 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           ))}
         </MapView>
         :
-        <MapView 
-          style={styles.map} 
-          region={mapRegion}
-          onRegionChangeComplete={(region) => setMapRegion(region)}
-        /> 
+       
+        <Text text="" style={$tagline} />
+      //  <MapView 
+      //     style={styles.map} 
+      //     region={mapRegion}
+      //     onRegionChangeComplete={(region) => setMapRegion(region)}
+      //   /> 
       }
       <KeyboardAvoidingView>
         <View style = {styles.searchContainer}>
@@ -171,7 +183,7 @@ export const NavigationScreen: FC<DemoTabScreenProps<"Navigate">> = function Nav
           <Button
             onPress={handleSubmit}
             title="Get Directions"
-            color="#f7c100"
+            color="#00204f"
             accessibilityLabel="Submit Source & Destination addresses"
           />
         </View>        
@@ -199,6 +211,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginBottom: spacing.medium,
+    textAlign:"left"
   },
   searchContainer: {
     position: "absolute",

@@ -49,8 +49,7 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
         <ListItem
           LeftComponent={
             <View style={$item}>
-              <Text preset="bold">User Name</Text>
-              <Text>{Application.applicationId}</Text>
+              <Text preset="bold">Thank you for using the Lumos App!</Text>
             </View>
           }
         />

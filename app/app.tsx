@@ -104,13 +104,13 @@ function App(props: AppProps) {
   // otherwise, we're ready to render the app
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <ErrorBoundary catchErrors={Config.catchErrors}>
+      {/* <ErrorBoundary catchErrors={Config.catchErrors}> */}
         <AppNavigator
           linking={linking}
           initialState={initialNavigationState}
           onStateChange={onNavigationStateChange}
         />
-      </ErrorBoundary>
+      {/* </ErrorBoundary>r */}
     </SafeAreaProvider>
   )
 }

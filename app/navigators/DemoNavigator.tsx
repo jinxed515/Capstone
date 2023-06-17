@@ -98,7 +98,7 @@ export function DemoNavigator() {
         options={{
           tabBarLabel: translate("demoNavigator.debugTab"),
           tabBarIcon: ({ focused }) => (
-            <Icon icon="community" color={focused ? "#f7c100" : colors.textDim} size={30} />
+            <Icon icon="settings" color={focused ? "#f7c100" : colors.textDim} size={30} />
           ),
         }}
       />

@@ -45,7 +45,7 @@ const en = {
 
   demoNavigator: {
     componentsTab: "Components",
-    debugTab: "Profile",
+    debugTab: "Settings",
     communityTab: "Community",
     navigationTab:"Navigate",
     podcastListTab: "Podcast",
@@ -97,7 +97,7 @@ const en = {
   },
   demoDebugScreen: {
     howTo: "HOW TO",
-    title: "Profile",
+    title: "Settings",
     tagLine:
       "Congratulations, you've got a very advanced React Native app template here.  Take advantage of this boilerplate!",
     reactotron: "Send to Reactotron",
