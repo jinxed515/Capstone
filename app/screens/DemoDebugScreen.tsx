@@ -55,37 +55,10 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
           }
         />
         
-        <ListItem
-          LeftComponent={
-            <View style={$item}>
-              <Text preset="bold">App Version</Text>
-              <Text>{Application.nativeApplicationVersion}</Text>
-            </View>
-          }
-        />
-        <ListItem
-          LeftComponent={
-            <View style={$item}>
-              <Text preset="bold">App Build Version</Text>
-              <Text>{Application.nativeBuildVersion}</Text>
-            </View>
-          }
-        />
-        <ListItem
-          LeftComponent={
-            <View style={$item}>
-              <Text preset="bold">Hermes Enabled</Text>
-              <Text>{String(usingHermes)}</Text>
-            </View>
-          }
-        />
       </View>
+     
       <View style={$buttonContainer}>
-        <Button style={$button} tx="demoDebugScreen.reactotron" onPress={demoReactotron} />
-        <Text style={$hint} tx={`demoDebugScreen.${Platform.OS}ReactotronHint` as const} />
-      </View>
-      <View style={$buttonContainer}>
-        <Button style={$button} tx="common.logOut" onPress={logout} />
+        <Button style={{  marginBottom: spacing.extraSmall,  backgroundColor:"#00204f"}} text="LogOut" textStyle={{color:"#fff"}} onPress={logout} />
       </View>
     </Screen>
   )
@@ -117,10 +90,13 @@ const $itemsContainer: ViewStyle = {
 
 const $button: ViewStyle = {
   marginBottom: spacing.extraSmall,
+  backgroundColor:"#00204f",
+  textcolor:"#fff"
 }
 
 const $buttonContainer: ViewStyle = {
   marginBottom: spacing.medium,
+  
 }
 
 const $hint: TextStyle = {

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { TextStyle, ViewStyle, StyleSheet, Image } from "react-native"
 import { Card, Screen, Text } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
@@ -6,97 +6,72 @@ import { spacing } from "../theme"
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import markers from "../data/streetlight_locations.json"
 
-export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = function DStreetLightsScreen(
-  _props,
-) {
+export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = function DStreetLightsScreen(  _props,) {
+  
+  //Fix the region of the map
   const mapRegion = {
     latitude: 12.840711,
     longitude: 77.676369,
     latitudeDelta: 0.009,
     longitudeDelta: 0.009,
   };
+  
+  //The markers to be rendered on the Actual Display
+  const [newMarkers, setNewMarkers] = useState([]);
 
+
+  //Fetch illumination and add additional markers if neccessary
   const mapMarkers = () => {
-     
+    var updatedMarkers = markers;
+    console.log("Fetch started");
+
     fetch("https://api.thingspeak.com/channels/2182368/fields/1.json?api_key=63Z862MQUNXJHEDR&results=1")
       .then((response) => response.json())
       .then((info) => {
-        // console.log(info.feeds[0].field1);
-        // console.log("Added");
-        if (info.feeds[0].field1 < 4095) markers.push({
-          "longitude": 77.5655,
-          "latitude": 12.9410
-        });
 
+        // console.log(newMarkers);        
+        // updatedMarkers.push({
+        //       "longitude": 77.5653756,
+        //         "latitude": 12.9407198
+        //   });
+        // setNewMarkers(updatedMarkers);
+        // console.log(markers);
+        var value = parseInt(info.feeds[0].field1);
+        console.log("Fetch result :"+ (value + 0) );
+        
+        if (value < 4095) {
+          updatedMarkers = [
+            ...markers,
+            {
+              longitude: 77.5653756,
+              latitude: 12.9407198,
+            },
+          ];
+          console.log("--------------------------------------------------------------------------")
+          
+        }
+
+        setNewMarkers(updatedMarkers);
+        console.log(updatedMarkers.length);
+        // console.log(value + 0);
+      })
+      .catch((error) => {
+        console.log('Error fetching markers:');
       });
-
-    fetch("https://api.thingspeak.com/channels/2182371/fields/1.json?api_key=5MS1IBYEGBZHRUD9&results=1")
-      .then((response) => response.json())
-      .then((info) => {
-        // console.log(info.feeds[0].field1);
-        if (info.feeds[0].field1 < 4095) markers.push({
-          "longitude": 77.55471519999999,
-          "latitude": 13.011023
-        });
-      });
-
-   fetch("https://api.thingspeak.com/channels/2182363/fields/1.json?api_key=2OVS23NM20RXQG7G&results=1")
-      .then((response) => response.json())
-      .then((info) => {
-        // console.log(info.feeds[0].field1);
-        if (info.feeds[0].field1 < 4095) markers.push({
-          "longitude": 77.5711719,
-          "latitude": 12.9916302
-        });
-      });
-
-    return markers.map((marker, index) =>
-      <Marker
-        key={index}
-        coordinate={{
-          latitude: marker.latitude,
-          longitude: marker.longitude,
-        }}
-        image={require('../../assets/icons/customMarker.png')}
-      />
-    )
   }
 
   useEffect(() => {
-    
-    fetch("https://api.thingspeak.com/channels/2182368/fields/1.json?api_key=63Z862MQUNXJHEDR&results=1")
-      .then((response) => response.json())
-      .then((info) => {
-        // console.log(info.feeds[0].field1);
-        // console.log("Added");
-        if (info.feeds[0].field1 < 4095) markers.push({
-          longitude: 77.5655,
-          latitude: 12.9410
-        });
+    mapMarkers();
+  }, []);
 
-      });
+  
+  useEffect(() => {
+    const timer = setInterval(mapMarkers, 3000);
 
-    fetch("https://api.thingspeak.com/channels/2182371/fields/1.json?api_key=5MS1IBYEGBZHRUD9&results=1")
-      .then((response) => response.json())
-      .then((info) => {
-        // console.log(info.feeds[0].field1);
-        if (info.feeds[0].field1 < 4095) markers.push({
-          longitude: 77.653861,
-          latitude: 12.83975
-        });
-      });
-
-    fetch("https://api.thingspeak.com/channels/2182363/fields/1.json?api_key=2OVS23NM20RXQG7G&results=1")
-      .then((response) => response.json())
-      .then((info) => {
-        // console.log(info.feeds[0].field1);
-        if (info.feeds[0].field1 < 4095) markers.push({
-          longitude: 77.653861,
-          latitude: 12.83975
-        });
-      });
-  }, [])
-
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <Screen preset="scroll" contentContainerStyle={$container} safeAreaEdges={["top"]}>
@@ -105,11 +80,23 @@ export const StreetLightsScreen: FC<DemoTabScreenProps<"StreetLights">> = functi
       <Text text="View all the streetlights in the city" style={$subtitle} />
 
       <MapView
+        key={newMarkers.length}
         style={styles.map}
         region={mapRegion}
         showsUserLocation={true}
       >
-        {mapMarkers()}
+        {
+          newMarkers.map((marker, index) =>
+            <Marker
+              key={index}
+              coordinate={{
+                latitude: marker.latitude,
+                longitude: marker.longitude,
+              }}
+              image={require('../../assets/icons/customMarker.png')}
+            />
+          )
+        }
       </MapView>
 
     </Screen>
@@ -125,6 +112,7 @@ const styles = StyleSheet.create({
 
 const $container: ViewStyle = {
   height: "100%",
+  backgroundColor: "#ffffff",
   paddingTop: spacing.extraLarge + spacing.small,
   paddingHorizontal: spacing.large,
 }
